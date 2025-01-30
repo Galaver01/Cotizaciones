@@ -1,0 +1,123 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #34495e;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.producto {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.producto input {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+#agregarProducto {
+    background-color: #2ecc71;
+    color: white;
+    margin-top: 10px;
+}
+
+#agregarProducto:hover {
+    background-color: #27ae60;
+}
+
+button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+#descargarPDF {
+    background-color: #9b59b6;
+    color: white;
+    margin-top: 15px;
+}
+
+#descargarPDF:hover {
+    background-color: #8e44ad;
+}
+
+.eliminar {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+}
+
+.eliminar:hover {
+    background-color: #c0392b;
+}
+
+#preview {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px dashed #e0e0e0;
+}
