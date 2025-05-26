@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         yPos += 10;
 
         // Tabla de productos
-        const headers = ["ECO", "FECHA TRABAJO", "Descripción", "Cantidad", "P. Unitario", "Subtotal"];
+        const headers = ["Eco", "Fecha de trabajo", "Descripción", "Cantidad", "P. Unitario", "Subtotal"];
         const columns = [10, 35, 70, 130, 155, 180]; 
         
         yPos = 75; 
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.text(`IVA (${ivaSelect.value * 100}%): $${iva.toFixed(2)}`, 150, yPos + 8);
         
         if (isr > 0) { 
-            doc.text(`Retención ISR (1.25%): -$${isr.toFixed(2)}`, 150, yPos + 16); 
+            doc.text(`ISR: -$${isr.toFixed(2)}`, 150, yPos + 16); 
             doc.setFontSize(13);
             doc.text(`Total: $${total.toFixed(2)}`, 150, yPos + 24); 
             doc.setFontSize(10);
