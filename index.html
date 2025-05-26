@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <title>Sistema de Cotizaciones</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Agrega esto en el <head> de index.html -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Generar Cotización</h1>
         <form id="cotizacionForm">
-            <!-- Datos del cliente -->
             <div class="form-group">
-                <label>Cliente:</label>
-                <input type="text" id="cliente" required>
+                <label for="cliente">Cliente:</label>
+                <select id="cliente" required>
+                    <option value="">Seleccione un cliente</option>
+                    <option value="Transportes Maeda">Transportes Maeda</option>
+                    <option value="Maeda Logistic">Maeda Logistic</option>
+                </select>
             </div>
             
-            <!-- Productos/Servicios -->
             <div class="form-group">
                 <label>Productos/Servicios:</label>
                 <div id="productos">
                     <div class="producto">
+                        <input type="text" placeholder="Economico trabajado" class="economico" required>
+                        <input type="date" placeholder="Fecha de trabajo" class="fecha" required>
                         <input type="text" placeholder="Descripción" class="descripcion" required>
                         <input type="number" placeholder="Cantidad" class="cantidad" required>
                         <input type="number" placeholder="Precio unitario" class="precio" required>
@@ -30,7 +33,12 @@
                 </div>
                 <button type="button" id="agregarProducto">Agregar Producto</button>
             </div>
-            
+
+            <div class="form-group">
+                <input type="checkbox" id="aplicarISR">
+                <label for="aplicarISR">Aplicar Retención de ISR (1.25%)</label>
+            </div>
+
             <button type="submit">Generar Cotización</button>
             <button id="descargarPDF" style="display: none;">Descargar PDF</button>
         </form>
@@ -38,5 +46,6 @@
         <div id="preview"></div>
     </div>
     <script src="app.js"></script>
+    
 </body>
 </html>

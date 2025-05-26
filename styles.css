@@ -37,19 +37,50 @@ label {
     font-weight: 600;
 }
 
-input {
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select { /* Estilo para el select de clientes */
     width: 100%;
     padding: 10px;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     margin-bottom: 10px;
     transition: border-color 0.3s ease;
+    box-sizing: border-box; /* Asegura que padding no aumente el ancho total */
+    background-color: white; /* Fondo blanco para el select */
+    -webkit-appearance: none; /* Elimina estilos por defecto en WebKit */
+    -moz-appearance: none;    /* Elimina estilos por defecto en Mozilla */
+    appearance: none;         /* Elimina estilos por defecto */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2334495e%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.4H18.6c-5%200-9.3%201.8-13.2%205.5-3.9%203.7-5.9%208-5.9%2012.3%200%204.3%202%208.5%205.9%2012.3l128.9%20127.8c3.9%203.7%208.1%205.6%2013.2%205.6s9.3-1.9%2013.2-5.6L287%2094c3.9-3.7%205.9-8%205.9-12.3s-2-8.5-5.9-12.3z%22%2F%3E%3C%2Fsvg%3E'); /* Flecha personalizada */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px; /* Espacio para la flecha */
 }
 
-input:focus {
+input:focus,
+select:focus { /* Estilo para el select de clientes al enfocar */
     border-color: #3498db;
     outline: none;
 }
+
+/* Estilos específicos para el checkbox */
+.form-group input[type="checkbox"] {
+    width: auto; /* Ancho automático para no ocupar el 100% */
+    margin-right: 10px; /* Espacio entre el checkbox y su label */
+    vertical-align: middle; /* Alinea verticalmente con el texto */
+    margin-bottom: 0; /* Elimina el margen inferior extra */
+}
+
+.form-group label[for="aplicarISR"] {
+    display: inline-block; /* Permite que el label esté al lado del checkbox */
+    margin-bottom: 0; /* Elimina el margen inferior extra */
+    vertical-align: middle; /* Alinea verticalmente con el checkbox */
+    font-weight: normal; /* El texto del label no necesita ser negrita aquí */
+    color: #34495e;
+}
+
 
 .producto {
     display: flex;
@@ -120,4 +151,34 @@ button[type="submit"]:hover {
     background: #f8f9fa;
     border-radius: 8px;
     border: 2px dashed #e0e0e0;
+}
+
+#preview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#preview th,
+#preview td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#preview th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#preview .totales {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+#preview .totales h4 {
+    margin-top: 10px;
+    font-size: 1.3em;
+    color: #2c3e50;
 }
