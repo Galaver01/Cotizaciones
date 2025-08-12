@@ -6,6 +6,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const descargarBtn = document.getElementById('descargarPDF');
     const aplicarISRCheckbox = document.getElementById('aplicarISR'); // Referencia al checkbox
 
+    // Tema (claro/oscuro)
+    const themeKey = 'theme';
+    const rootEl = document.documentElement;
+    const themeToggleBtn = document.getElementById('themeToggle');
+
+    const setTheme = (theme) => {
+        if (theme === 'light') {
+            rootEl.setAttribute('data-theme', 'light');
+        } else {
+            rootEl.removeAttribute('data-theme'); // oscuro por defecto
+        }
+        localStorage.setItem(themeKey, theme);
+        updateThemeToggleText();
+    };
+
+    const updateThemeToggleText = () => {
+        if (!themeToggleBtn) return;
+        const isLight = rootEl.getAttribute('data-theme') === 'light';
+        themeToggleBtn.textContent = isLight ? 'Modo oscuro' : 'Modo claro';
+        themeToggleBtn.title = isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro';
+    };
+
+    const savedTheme = localStorage.getItem(themeKey);
+    const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+        setTheme('light');
+    } else {
+        setTheme('dark');
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = rootEl.getAttribute('data-theme') === 'light';
+            setTheme(isLight ? 'dark' : 'light');
+        });
+    }
+
     // Función para convertir números a letras
     function numeroALetras(num) {
         const unidades = ['', 'un', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'];
@@ -63,12 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const nuevoProducto = document.createElement('div');
         nuevoProducto.className = 'producto';
         nuevoProducto.innerHTML = `
-            <input type="text" placeholder="Economico trabajado" class="economico" required>
+            <input type="text" placeholder="Económico trabajado" class="economico" required>
             <input type="date" placeholder="Fecha de trabajo" class="fecha" required>
             <input type="text" placeholder="Descripción" class="descripcion" required>
-            <input type="number" placeholder="Cantidad" class="cantidad" required>
-            <input type="number" placeholder="Precio unitario" class="precio" required>
-            <button type="button" class="eliminar">X</button>
+            <input type="number" placeholder="Cantidad" class="cantidad" min="1" required>
+            <input type="number" placeholder="Precio unitario" class="precio" step="0.01" min="0" required>
+            <button type="button" class="eliminar" aria-label="Eliminar producto">X</button>
         `;
         productosDiv.appendChild(nuevoProducto);
     });
@@ -80,12 +117,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Selector de IVA
+    const ivaGroup = document.createElement('div');
+    ivaGroup.className = 'form-group';
+
+    const ivaLabel = document.createElement('label');
+    ivaLabel.setAttribute('for', 'iva');
+    ivaLabel.textContent = 'Impuesto (IVA)';
+
     const ivaSelect = document.createElement('select');
+    ivaSelect.id = 'iva';
+    ivaSelect.setAttribute('aria-label', 'Seleccionar porcentaje de IVA');
     ivaSelect.innerHTML = `
         <option value="0.16">IVA 16%</option>
         <option value="0.00">Sin IVA</option>
     `;
-    form.insertBefore(ivaSelect, form.querySelector('button[type="submit"]'));
+
+    ivaGroup.appendChild(ivaLabel);
+    ivaGroup.appendChild(ivaSelect);
+    form.insertBefore(ivaGroup, form.querySelector('button[type="submit"]'));
 
     // Función para generar el PDF
     const generarPDF = (cliente, productos, subtotal, iva, isr, total, fecha) => { 
@@ -204,7 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.text("* Precios sujetos a cambio sin previo aviso", 15, yPos);
         doc.text("* Pago de contado", 15, yPos + 5);
         doc.text("* Cotización vigente 5 días hábiles", 15, yPos + 10);
-        
+
+
         yPos += 20;
         doc.setTextColor(0); 
         doc.setFontSize(10);
